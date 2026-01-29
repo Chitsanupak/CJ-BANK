@@ -1,8 +1,8 @@
-import * as pg from "pg";
-const {pool} = pg.defaults
+import pkg from "pg";
+const { Pool } = pkg;
 
-const connectionPol = new pool({
-    connectionString: "postgresql://postgres:78910123@localhost:4000/CJ-BANK"
+const connectionPool = new Pool({
+    connectionString: "postgresql://postgres:78910123@localhost:5432/CJ-BANK"
 });
 
-export default connectionPol;
+export default connectionPool;
