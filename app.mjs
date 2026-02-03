@@ -55,3 +55,26 @@ app.post("/accounts_create", async (req,res)=> {
     );
 })
 
+app.post("/transfer", async (req,res) => {
+
+    try{
+        const{from_account,to_accont,amount} = req.body
+
+        // เช็กข้อมูลที่ส่งมา
+        if (!from_account || !to_accont || !amount){
+            return res.status(400)._construct.json({message: "กรุณากรอกข้อมูลให้ครบ"})
+        };
+
+         // ดึงยอดเงินของฝั่งโอน
+        const sender = await client.query(
+            "SELECT balanc FROM accounts WHERE account_id = $1"
+            [to_accont]
+        );
+
+
+
+    } catch (err){
+        await client.query("ROLLBACK")
+    }
+})
+
